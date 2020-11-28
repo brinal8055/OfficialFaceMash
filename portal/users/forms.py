@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile_student, Profile_corporate
 
-
 class RegistrationForm(UserCreationForm):
     '''
         basic registration form for both researchers and companies.
@@ -37,6 +36,9 @@ class student_form(ModelForm):
         fields = [
             'institution',
             'institute_email',
+            'gender',
+            'relationship_status',
+            'mobile',
             'profile_picture',
         ]
 
@@ -47,10 +49,9 @@ class corporate_form(ModelForm):
     class Meta:
         model = Profile_corporate
         fields = [
-            'gender',
+            'institution',
             'email',
-            'relationship_status',
-            'mobile_number',
+            'role',
             'profile_picture',
         ]
 

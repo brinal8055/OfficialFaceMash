@@ -3,10 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 
 GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-    )
-
+	('M', 'Male'),
+	('F', 'Female')
+)
 
 class Profile_student(models.Model):
 	# one user is related to one profile and vice versa, and when User is deleted, the profile gets deleted
@@ -16,7 +15,9 @@ class Profile_student(models.Model):
 	# Should we have a model for each institution as well instead of string ? -- Opinion one - No(it's just prototype, let's keep it simple)
 	institution = models.CharField(max_length=100, default='Other')
 	institute_email = models.EmailField(max_length=254)
-
+	gender = models.CharField(max_length=10,choices=GENDER_CHOICES)
+	mobile = models.CharField(max_length=15, default="+91")
+	relationship_status = models.CharField(max_length=10, default="Single")
 	# each user has a list of papers, make a posts app, and import it here.
 	# add many to many field.
 
@@ -47,19 +48,19 @@ class Profile_corporate(models.Model):
 
 	# for storing name of institution,
 	# Should we have a model for each institution as well instead of string ? -- Opinion one - No(it's just prototype, let's keep it simple)
-	gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+	institution = models.CharField(max_length=100, default='Other')
 	#institute email is preferred but not compulsory
 	email = models.EmailField(max_length=254)
-	relationship_status = models.CharField(max_length=20, default="Single")
+	role = models.CharField(max_length=100, default='empty')
 
 	# each user has a list of papers, make a posts app, and import it here.
 	# add many to many field.
-	mobile_number = models.CharField(max_length=15, default='+91')
+
 	# ELO rating of current user
-	# rating = models.IntegerField(default=1600)
+	rating = models.IntegerField(default=1600)
 
 	# list of authors that current user follows
-	# authors_followed = models.ManyToManyField('Profile_corporate', blank=True)
+	authors_followed = models.ManyToManyField('Profile_corporate', blank=True)
 
 	#image - photo :)
 	profile_picture = models.ImageField(upload_to='profile_picture/', default='profile_picture/image.jpg')
